@@ -5,19 +5,19 @@ import { setupCounter } from "./counter";
 test("Que tenha um título na página", ()=>{
 
     const app = document.createElement("div");
-    app.innerHTML = setupRootApp();
+    app.append(setupRootApp());
     const h1 = app.querySelector("h1");
-    expect(h1.textContent).toBe("Get started");
+    expect(h1.textContent).toBe("App de lista");
 
 });
 
-test("Quando clica no botão deve incrementar", ()=>{
+test("Quando clica no botão atualizar, deve ter 3 itens", ()=>{
     const app = document.createElement("div");
-    app.innerHTML = setupRootApp();
-    const botao = app.querySelector("button");
-    setupCounter(botao);
-    expect(botao.textContent).toBe("Count is 0");
+    app.append(setupRootApp());
+    const botao = app.querySelector("#atualizar");
+    expect(botao.textContent).toBe("Atualizar")
     botao.click();
-    expect(botao.textContent).toBe("Count is 1");
+    const ol = app.querySelector("ol");
+    expect(ol.children.length).toBe(3);
 
 });

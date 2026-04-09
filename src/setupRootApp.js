@@ -20,6 +20,7 @@ function criaLista(){
   div.appendChild(ol)
 
   const btnAtualizar = document.createElement("button");
+  btnAtualizar.id = "atualizar";
   btnAtualizar.textContent = "Atualizar";
   div.appendChild(btnAtualizar);
 
