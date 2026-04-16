@@ -1,12 +1,15 @@
-import { getLista } from "./lista";
+import { adicionaNaLista, getLista } from "./lista";
 
 export function setupRootApp(){ 
   const divRoot = document.createElement("div");
   divRoot.append(criaTitulo());
   divRoot.append(criaForm());
   divRoot.append(criaLista());
+  atualizaLista();
   return divRoot;
 }
+
+let list; 
 
 function criaTitulo(){
   const h1 = document.createElement("h1");
@@ -37,8 +40,10 @@ function setupFormSubmit(form) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     console.log(document.entry.text.value);
+    adicionaNaLista(document.entry.text.value);
     document.entry.text.value = "";
     document.entry.text.focus();
+    atualizaLista();
   })
 }
 
@@ -47,22 +52,23 @@ function criaLista(){
   const ol = document.createElement("ol");
   ol.id = "lista";
   div.appendChild(ol)
+  list = ol;
+  
+  // const btnAtualizar = document.createElement("button");
+  // btnAtualizar.id = "atualizar";
+  // btnAtualizar.textContent = "Atualizar";
+  // div.appendChild(btnAtualizar);
 
-  const btnAtualizar = document.createElement("button");
-  btnAtualizar.id = "atualizar";
-  btnAtualizar.textContent = "Atualizar";
-  div.appendChild(btnAtualizar);
-
-  btnAtualizar.addEventListener("click", () => atualizaLista(ol));
+  // btnAtualizar.addEventListener("click", atualizaLista);
   
   return div;
 }
 
-function atualizaLista(ol) {
-  ol.innerHTML = "";
+function atualizaLista() {
+  list.innerHTML = "";
   getLista().forEach(item => {
     const li = document.createElement("li");
     li.textContent = item;
-    ol.appendChild(li);
+    list.appendChild(li);
   });
 }
